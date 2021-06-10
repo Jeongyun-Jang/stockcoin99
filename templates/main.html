@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+    <!-- Webpage Title -->
+    <title>STOCKCOIN</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="스위터 - 세상을 달달하게"/>
+    <meta property="og:description" content="mini project for Web Plus"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script>
+        function sign_out() {
+                $.removeCookie('mytoken', {path: '/'});
+                alert('로그아웃 되었습니다.')
+                window.location.href = "/login"
+            }
+    </script>
+    <style>
+        html , body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100vh;
+            border: 15px solid white;
+            box-sizing: border-box;
+            background-color: black;
+            position: relative;
+            display: table;
+            table-layout: fixed;
+            overflow:hidden
+        }
+
+        .container {
+           /*margin: 0 auto 0 auto;*/
+            height: 100%;
+            border: 0px solid red;
+            box-sizing: border-box;
+            display: table-cell;
+
+
+        }
+
+        .login {
+            position: absolute;
+            right: 15px;
+            font-size: 15px;
+            z-index: 1;
+            top: 8px;
+        }
+        .login:hover {
+            position: absolute;
+            right: 15px;
+            top: 8px;
+            font-size: 15px;
+            border-bottom: 2px solid #DBFC52;
+            z-index: 1;
+        }
+
+        .login2  {
+            position: relative;
+            font-size: 10px;
+            left: 15px;
+            top: 8px;
+        }
+        .login3  {
+            position: absolute;
+            font-size: 10px;
+            left: 45%;
+            top: 8px;
+        }
+        .login4  {
+            position: absolute;
+            font-size: 10px;
+            left: 10px;
+            bottom: 15px;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+
+        }
+
+        .container2 .logo {
+            width: 400px;
+            height: 66px;
+            background: url('../static/logo2.png') no-repeat;
+            background-size: contain;
+            margin-left: -10px;
+        }
+
+        .container2 section {
+            max-width: 400px;
+            margin-left: 30px;
+
+        }
+        .container2 {
+            position: absolute;
+            top: 37%;
+        }
+
+        .container_body {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            box-sizing: border-box;
+
+        }
+
+        .coin {
+            width: 200px;
+            height: 160px;
+            background: url('../static/ycoin1.png') no-repeat;
+            background-size: contain;
+        }
+        .stcok {
+            width: 200px;
+            height: 160px;
+            background: url('../static/ystock1.png') no-repeat;
+            background-size: contain;
+            margin-left: -80px;
+
+        }
+        .coin:hover {
+            width: 200px;
+            height: 160px;
+            background: url('../static/ycoin3.png') no-repeat;
+            background-size: contain;
+        }
+        .stcok:hover {
+            width: 200px;
+            height: 160px;
+            background: url('../static/ystock3.png') no-repeat;
+            background-size: contain;
+            margin-left: -80px;
+
+        }
+
+        .line {
+            width: 22vw;
+            height: 80vh;
+            background: url('../static/line2.png') no-repeat;
+            background-size: contain;
+            margin-left: -80px;
+        }
+        .section2 {
+            max-width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 10%;
+            right: 2%;
+        }
+        .container2 a {
+            color: #DBFC52;
+            text-decoration: none;
+        }
+        .container2 a:hover {
+            color: #DBFC52;
+            text-decoration: none;
+            border-bottom: 2px solid #DBFC52;
+        }
+
+    </style>
+
+    </head>
+    <body>
+
+    <div class="wrap">
+        <div class="container">
+{#            로그인 정보 있으면 sign out -> function signout 연결, 없으면 sign in #}
+            <div class="login">
+                {% if user_info %}
+                    <a onclick="sign_out()" style="color: white; text-decoration:none;">sign out</a>
+                {% else %}
+                    <a href="/login" style="color: white; text-decoration:none;">sign in / sign up</a>
+                {% endif %}
+            </div>
+
+            <div class="login2">
+                <a style="color: white; text-decoration:none;">01</a>
+            </div>
+
+            <div class="login3">
+                <a style="color: white; text-decoration:none;">team4 project</a>
+            </div>
+
+            <div class="login4">
+                <a style="color: white; text-decoration:none;">posting review website</a>
+            </div>
+
+            <div class="container_body">
+
+                <div class="container2">
+                    <section>
+                        <div class="logo">
+                        </div>
+                        <p style="color: white">Contrary to popular belief, Lorem Ipsum is not simply random text.
+                            It has roots in a piece of classical Latin literature from 45 BC,
+                            making it over 2000 years old.
+                        </p>
+                        <a style="" href="https://www.notion.so/1bc12bb63a19400ba3d413dfbb58f523">more details -></a>
+{#                        <p style="color: #DBFC52">more details -></p>#}
+                    </section>
+                </div>
+
+                <section class="section2">
+
+                    <div onclick="window.location.href='/getcard?type_give=coin'" class="coin">
+                    </div>
+                    <div class="line"></div>
+                    <div onclick="window.location.href='/getcard?type_give=stock'" class="stcok">
+                    </div>
+
+                </section>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    </body>
+</html>

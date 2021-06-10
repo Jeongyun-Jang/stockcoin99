@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+    <!-- Webpage Title -->
+    <title>STOCKCOIN</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="스위터 - 세상을 달달하게"/>
+    <meta property="og:description" content="mini project for Web Plus"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Jua&display=swap" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script>
+        function sign_out() {
+                $.removeCookie('mytoken', {path: '/'});
+                alert('로그아웃 되었습니다.')
+                window.location.href = "/login"
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+        html, body {
+                background-color: black;
+                height:100%;
+
+            }
+        .logo {
+                width: 170px;
+                padding: 15px 15px;
+                position: fixed;
+            }
+        .userbox {
+            margin: 20px;
+        }
+        #card {
+            background-color: white;
+            width: 250px;
+            margin: 20px;
+
+        }
+                .container {
+            padding: 15px;
+            text-align: center;
+
+        }
+        button {
+            margin-top: 15px;
+            width: 85%;
+            background-color: #DBFC52;
+            border: 1.5px solid black;
+            padding:  4px 0;
+        }
+        .login {
+            position: absolute;
+            right: 15px;
+            font-size: 15px;
+            z-index: 1;
+            top: 8px;
+        }
+        .login:hover {
+            position: absolute;
+            right: 15px;
+            top: 8px;
+            font-size: 15px;
+            border-bottom: 2px solid #DBFC52;
+            z-index: 1;
+        }
+
+
+        table{
+            margin: 10px 30px;
+            width:300px;
+            border-collapse:collapse;
+            text-align: left;
+        }
+        .td1{
+            color: darkblue;
+            width: 50px;
+            /*border:1px solid red;*/
+        }
+        .td2{
+            color: black;
+            width: 100px;
+            /*border:1px solid red;*/
+        }
+
+        .img-icon{
+            width: 200px;
+            height: 200px;
+            border-radius: 3px;
+            margin: 10px auto;
+        }
+
+        ul {
+            margin: 20px 0px;
+        }
+
+
+    .detail-card div{
+        line-height: 160%;
+
+    }
+
+/*card */
+    .cards-box {
+            display: flex;
+            /*justify-content: space-between;*/
+            margin: 0 70px;
+            margin-top: 65px;
+            flex-wrap: wrap;
+            float: left;
+        }
+
+    </style>
+
+    </head>
+    <body>
+
+        <div class="logo" onclick="window.location.href='/'">
+            <img src="../static/logo.png" alt="">
+        </div>
+
+         <div class="login">
+                {% if user_info %}
+                    <a onclick="sign_out()" style="color: white; text-decoration:none;">sign out</a>
+                {% else %}
+                    <a href="/login" style="color: white; text-decoration:none;">sign in / sign up</a>
+                {% endif %}
+         </div>
+
+
+        <br>
+        <br>
+        {% if user_info %}
+            <div class="userbox">
+                <div>{{ user_info.username }}님, 금주 top3 앱입니다!</div>
+                <div style="border: 1px solid; width: 80%; height: 200px"></div>
+            </div>
+        {% endif %}
+
+        <div class="cards-box">
+            {% for i in result %}
+            {#리뷰정보 불러오기#}
+            <div class="card" id="card" onclick="window.location.href='/get_detail_Test?type_give={{ i.app_name }}'" style="border: 2px solid; margin: 20px; width: 300px;">
+                <div class="container">
+                {% if i.type == '코인거래소' %}
+                    <img class="card-img-top img-icon" src="{{ i.image_url }}" alt="dd" >
+                    {% else %}
+                    <img class="card-img-top img-icon" src="{{ i.image_url }}" alt="dd" >
+                    {% endif %}
+                    <table>
+                        <tr><td class="td1">어플명</td><td class="td2">{{ i.app_name }}</td></tr>
+                        <tr><td class="td1">회사명</td><td class="td2">{{ i.company }}</td></tr>
+                        <tr><td class="td1">평점</td><td class="td2">몇점</td></tr>
+                        <tr><td class="td1">리뷰수</td><td class="td2">몇개</td></tr>
+                    </table>
+
+                    {% if user_info %}
+                    <button onclick="">리뷰작성</button>
+                    {% else %}
+                    <button onclick="review()">리뷰작성</button>
+                    {% endif %}
+                </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </body>
+</html>
